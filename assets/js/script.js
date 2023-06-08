@@ -4,8 +4,10 @@ const calculate = (event) => {
     let currentLevel = parseInt(document.getElementById("current_level").value);
     let desiredlevel = parseInt(document.getElementById("desired_level").value);
     let article = document.getElementsByTagName("article")[1];
+    let detail = document.getElementsByTagName("details");
     if (article.getElementsByTagName("table").length > 0) {
-        article.getElementsByTagName("table")[0].remove();
+        // Clear contents of article
+        article.innerHTML = '<div class="xp_wrapper">XP to Desired Level: <span id="xp_to_desired_level"></span></div>';
     }
     if (error.classList.contains("hide") == false) {
         error.classList.add("hide");
@@ -68,8 +70,6 @@ const calculate = (event) => {
                         headerCell.innerHTML = headers[j];
                         headerRow.appendChild(headerCell);
                     }
-                    console.log(i)
-                    console.log(table);
                 } else {
                     rowIndex++;
                 }
