@@ -33,26 +33,54 @@ const calculate = (event) => {
             raise_error("Current level cannot be equal to desired level");
             return;
         default:
-            let difference = current[desiredlevel - 1].running_total - current[currentLevel - 1].running_total; 
+            let difference = current[desiredlevel - 1].running_total - current[currentLevel - 1].running_total;
             document.getElementById("xp_to_desired_level").innerHTML = difference;
             let headers = ["Dungeon Tier", "XP per Run", "Number of Runs to Reach Desired Level"];
             let table = document.createElement("table");
-            for(let i = 0; i < dungeon.length; i++) {
-                let row = table.insertRow(i);
+            
+            let headerRow = table.insertRow();
+            for (let i = 0; i < headers.length; i++) {
+                let headerCell = document.createElement("th");
+                headerCell.innerHTML = headers[i];
+                headerRow.appendChild(headerCell);
+            }
+            
+            let rowIndex = 0;
+            
+            for (let i = 0; i < dungeon.length; i++) {
+                let row = table.insertRow();
                 row.insertCell(0).innerHTML = dungeon[i].tier;
                 row.insertCell(1).innerHTML = dungeon[i].reward;
                 row.insertCell(2).innerHTML = Math.ceil(difference / dungeon[i].reward);
+            
+                if ((i + 1) % 10 === 0 ) {
+                    let details = document.createElement("details");
+                    let summary = document.createElement("summary");
+                    summary.innerHTML = "Tier " + (i - 8) + "-" + (i + 1);
+                    details.appendChild(summary);
+                    details.appendChild(table.cloneNode(true));
+                    article.append(details);
+                    table = document.createElement("table");
+                    rowIndex = 0;
+                    headerRow = table.insertRow();
+                    for (let j = 0; j < headers.length; j++) {
+                        let headerCell = document.createElement("th");
+                        headerCell.innerHTML = headers[j];
+                        headerRow.appendChild(headerCell);
+                    }
+                    console.log(i)
+                    console.log(table);
+                } else {
+                    rowIndex++;
+                }
             }
-
-            let header = table.createTHead();
-            let headerRow = header.insertRow(0);
-            for(let i = 0; i < headers.length; i++) {
-                headerRow.insertCell(i).innerHTML = headers[i];
-            }
-
-            article.append(table);
+            let summaryTab = document.createElement("details");
+            summaryTab.innerHTML = "Summary";
+            summaryTab.appendChild(table);
+            article.append(summaryTab);
+            document.getElementsByTagName("details")[10].remove();
             article.classList.remove("hide");
-  }
+    }
 }
 
 const raise_error = (message) => {
