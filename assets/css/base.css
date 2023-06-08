@@ -1,0 +1,22 @@
+.hide {
+    display: none;
+}
+
+.container {
+    padding-top: 5%;
+    text-align: center;
+}
+
+.reduceMargin {
+    text-align: center;
+    padding: 5%;
+}
+
+.xp_wrapper {
+    margin-bottom: 5%;
+    text-align: center;
+}
+
+td {
+    text-align: center;
+}
