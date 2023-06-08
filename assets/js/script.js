@@ -27,7 +27,7 @@ const calculate = (event) => {
             raise_error("Current level cannot be greater than 20");
             return;
         case (desiredlevel > 200):
-            raise_error("Desired level cannot be greater than 200");
+            raise_error("Desired level cannot be greater than 21");
             return;
         case (currentLevel == desiredlevel):
             raise_error("Current level cannot be equal to desired level");
