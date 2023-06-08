@@ -4,15 +4,16 @@ const calculate = (event) => {
     let currentLevel = parseInt(document.getElementById("current_level").value);
     let desiredlevel = parseInt(document.getElementById("desired_level").value);
     let article = document.getElementsByTagName("article")[1];
+    if (article.getElementsByTagName("table").length > 0) {
+        article.getElementsByTagName("table")[0].remove();
+    }
     if (error.classList.contains("hide") == false) {
         error.classList.add("hide");
     }
     if (article.classList.contains("hide") == false) {
         article.classList.add("hide");
     }
-    // Replace below if statement with a switch statement
     switch (true) {
-        //NAN
         case (isNaN(currentLevel) || isNaN(desiredlevel)):
             raise_error("Current level or desired level is not a number"); 
             return;
